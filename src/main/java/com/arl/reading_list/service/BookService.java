@@ -38,6 +38,10 @@ public class BookService {
     return repo.save(book);
 }
 
-    public void delete(Long id) { repo.deleteById(id); }
+    public void delete(Long id) { 
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Book not found");
+        }
+        repo.deleteById(id); }
 }
 
